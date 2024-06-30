@@ -1,7 +1,9 @@
+const cors = require('cors');
 const express = require("express");
 const serverless = require("serverless-http");
 
-const api = express();
+const app = express();
+app.use(cors());
 
 const router = express.Router();
 router.get("/users", (req, res) => {
@@ -13,6 +15,6 @@ router.get("/users", (req, res) => {
   res.json([user]);
 });
 
-api.use("/api/", router);
+app.use("/api/", router);
 
-module.exports.handler = serverless(api);
+module.exports.handler = serverless(app);
